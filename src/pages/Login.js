@@ -39,7 +39,7 @@ class Login extends Component {
   }
 
   render() {
-    const { loading, submitIsDisabled } = this.setState;
+    const { loading, submitIsDisabled } = this.state;
     const { username } = this.props;
 
     return (
@@ -52,7 +52,9 @@ class Login extends Component {
               <span>Tunes</span>
             </h1>
           </div>
+
           <label htmlFor="name">
+            Usuário:
             <input
               type="text"
               placeholder="Seu nome de Usuário"
@@ -78,11 +80,12 @@ class Login extends Component {
               name="remember"
               type="checkbox"
             />
+            Me mantenha conectado
           </label>
 
           <button
             type="submit"
-            disabled={ submitIsdisabled }
+            disabled={ submitIsDisabled }
             onClick={ this.onButtonClick }
             data-testid="login-submit-button"
           >
@@ -94,7 +97,7 @@ class Login extends Component {
   }
 }
 
-Login.propsTypes = {
+Login.propTypes = {
   history: shape({}).isRequired,
   username: string.isRequired,
   handleChange: func.isRequired,
