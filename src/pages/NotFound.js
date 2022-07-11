@@ -5,4 +5,5 @@ class NotFound extends Component {
     return (<p data-testid="page-not-found">Not Found</p>);
   }
 }
+
 export default NotFound;

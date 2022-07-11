@@ -26,13 +26,13 @@ class Profile extends Component {
     const defaultImage = image !== '' ? image : 'https://via.placeholder.com/150';
 
     return (
-      <div data-testid="page-profile">
+      <div>
         <Header search="active" />
 
         { loading
           ? <p>Carregando...</p>
           : (
-            <div>
+            <div data-testid="page-profile">
               <img
                 data-testid="profile-image"
                 src={ defaultImage }

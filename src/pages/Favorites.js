@@ -43,6 +43,7 @@ class Favorites extends Component {
 
   render() {
     const { loading, allFavoriteSongs } = this.state;
+
     return (
       <div data-testid="page-favorites">
         <Header favorites="active" />
@@ -56,7 +57,7 @@ class Favorites extends Component {
                 key={ song.trackId }
                 allFavoriteSongs={ allFavoriteSongs }
                 song={ song }
-                updateFavoriteSongs={ this.updateFavoriteSongs }
+                updateFavoriteSongs={ this.removeFavoriteSongs }
               />
             )) }
         </ul>

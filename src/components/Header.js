@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { string } from 'prop-types';
+
 import { getUser } from '../services/userAPI';
 
 class Header extends Component {
@@ -14,8 +15,10 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    this.setState({ loading: true },
-      () => getUser().then((user) => this.setState({ user, loading: false })));
+    this.setState(
+      { loading: true },
+      () => getUser().then((user) => this.setState({ user, loading: false })),
+    );
   }
 
   render() {
@@ -33,9 +36,11 @@ class Header extends Component {
                   Trybe
                   <span>Tunes</span>
                 </h1>
-                <p data-testid="header-user-name">
+                <p
+                  data-testid="header-user-name"
+                >
                   <span>Olá</span>
-                  {''}
+                  {' '}
                   { name }
                   {'!'}
                 </p>
@@ -45,6 +50,7 @@ class Header extends Component {
                 <ul>
                   <li>
                     <Link
+                      { ...search }
                       data-testid="link-to-search"
                       to="/search"
                     >
@@ -53,6 +59,7 @@ class Header extends Component {
                   </li>
                   <li>
                     <Link
+                      { ...favorites }
                       data-testid="link-to-favorites"
                       to="/favorites"
                     >
@@ -60,7 +67,8 @@ class Header extends Component {
                     </Link>
                   </li>
                   <li>
-                      { ...`page-link ${profile}` }
+                    <Link
+                      { ...profile }
                       data-testid="link-to-profile"
                       to="/profile"
                     >

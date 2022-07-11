@@ -17,7 +17,7 @@ class ProfileEdit extends Component {
       email: '',
       image: '',
       description: '',
-      saveButtonIsDisabled: '',
+      saveButtonIsDisabled: true,
       loading: false,
       redirect: false,
     };
@@ -58,7 +58,7 @@ class ProfileEdit extends Component {
     );
 
     const isValid = [name, email, image, description].every(({ length }) => length > 0)
-  && !REGEX_TO_VALIDATE_EMAIL.test(email);
+      && REGEX_TO_VALIDATE_EMAIL.test(email);
 
     this.setState({ saveButtonIsDisabled: !isValid });
   }
