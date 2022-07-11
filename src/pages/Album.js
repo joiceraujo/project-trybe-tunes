@@ -31,7 +31,7 @@ class Album extends Component {
     this.setState(
       { loading: true },
       () => addOrRemove(song).then(() => {
-        getFavoritesSongs().then((favorites) => {
+        getFavoriteSongs().then((favorites) => {
           this.setState({ allFavoriteSongs: favorites || [], loading: false });
         });
       }),
@@ -66,7 +66,7 @@ class Album extends Component {
         ) : <p>Carregando...</p> }
         <ul>
           {!loading && albumContent
-            .filter((song, index) => index > 0)
+            .filter((_song, index) => index > 0)
             .map((song) => (
               <MusicCard
                 key={ song.trackId }
