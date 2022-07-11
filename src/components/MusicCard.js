@@ -41,11 +41,14 @@ class MusicCard extends Component {
           <p>{ collectionName }</p>
         </div>
 
-        <audio data-testid="audio-component">
+        <audio
+          controls
+          data-testid="audio-component"
+        >
           <source src={ previewUrl } />
           <track kind="captions" />
           O seu navegador não suporta o elemento
-
+          {' '}
           <code>audio</code>
         </audio>
 
