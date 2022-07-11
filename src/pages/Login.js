@@ -30,7 +30,7 @@ class Login extends Component {
   }
 
   onInputChange({ target: { value } }) {
-    const isValid = value.trim().lenght > 2;
+    const isValid = value.trim().length > 2;
     this.setState({ username: value, submitIsDisabled: !isValid });
   }
 
@@ -57,7 +57,7 @@ class Login extends Component {
                     <input
                       type="text"
                       id="username"
-                      placeholder="Seu nome de Usuário"
+                      placeholder="Seu nome de usuário"
                       name="username"
                       onChange={ this.onInputChance }
                       data-testid="login-name-input"
@@ -68,7 +68,7 @@ class Login extends Component {
                   <label htmlFor="password">
                     Senha:
                     <input
-                      name="passaword"
+                      name="password"
                       placeholder="Digite sua senha"
                       type="password"
                     />

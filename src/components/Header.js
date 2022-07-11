@@ -45,7 +45,6 @@ class Header extends Component {
                 <ul>
                   <li>
                     <Link
-                      { ...`page-link ${search}` }
                       data-testid="link-to-search"
                       to="/search"
                     >
@@ -54,7 +53,6 @@ class Header extends Component {
                   </li>
                   <li>
                     <Link
-                      { ...`page-link ${favorites}` }
                       data-testid="link-to-favorites"
                       to="/favorites"
                     >
@@ -62,7 +60,6 @@ class Header extends Component {
                     </Link>
                   </li>
                   <li>
-                    <Link
                       { ...`page-link ${profile}` }
                       data-testid="link-to-profile"
                       to="/profile"

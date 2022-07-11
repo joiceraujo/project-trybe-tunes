@@ -54,7 +54,6 @@ class Favorites extends Component {
             .map((song) => (
               <MusicCard
                 key={ song.trackId }
-                track
                 allFavoriteSongs={ allFavoriteSongs }
                 song={ song }
                 updateFavoriteSongs={ this.updateFavoriteSongs }
