@@ -91,7 +91,7 @@ class Search extends Component {
           { !loading && albums.length > 0 && (
             <p>
               Resultado de álbuns de:
-              {''}
+              {' '}
               { lastSearch }
             </p>
           )}
