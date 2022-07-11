@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { string, func, shape } from 'prop-types';
+import { shape } from 'prop-types';
 import { createUser } from '../services/userAPI';
 
 class Login extends Component {
@@ -10,6 +10,7 @@ class Login extends Component {
     this.onButtonClick = this.onButtonClick.bind(this);
 
     this.state = {
+      username: '',
       submitIsDisabled: true,
       loading: false,
     };
@@ -18,83 +19,81 @@ class Login extends Component {
   onButtonClick(event) {
     event.preventDefault();
 
-    const { username, history: { push } } = this.props;
+    const { username } = this.state;
+    const { history: { push } } = this.props;
 
     this.setState(
       { loading: true },
-      async () => {
-        await createUser({ name: username });
-        push('/search');
-      },
+      () => createUser({ name: username })
+        .then(() => push('/search')),
     );
   }
 
-  onInputChange(event) {
-    const { target: { value } } = event;
-    const { handleChange } = this.props;
-
-    const hasValidValue = value.trim().length > 2;
-    this.setState({ submitIsDisabled: !hasValidValue });
-    handleChange(event);
+  onInputChange({ target: { value } }) {
+    const isValid = value.trim().lenght > 2;
+    this.setState({ username: value, submitIsDisabled: !isValid });
   }
 
   render() {
-    const { loading, submitIsDisabled } = this.state;
-    const { username } = this.props;
+    const { username, loading, submitIsDisabled } = this.state;
 
     return (
       <div>
         { loading
           ? (<p>Carregando...</p>)
           : (
-            <form data-testid="page-login">
-              <div>
-                <h1>
-                  Trybe
-                  <span>Tunes</span>
-                </h1>
-              </div>
+            <div>
+              <form data-testid="page-login">
+                <div>
+                  <h1>
+                    Trybe
+                    <span>Tunes</span>
+                  </h1>
+                </div>
 
-              <label htmlFor="name">
-                Usuário:
-                <input
-                  type="text"
-                  placeholder="Seu nome de Usuário"
-                  name="username"
-                  onChange={ this.onInputChance }
-                  data-testid="login-name-input"
-                  value={ username }
-                />
-              </label>
+                <div>
+                  <label htmlFor="username">
+                    Usuário:
+                    <input
+                      type="text"
+                      id="username"
+                      placeholder="Seu nome de Usuário"
+                      name="username"
+                      onChange={ this.onInputChance }
+                      data-testid="login-name-input"
+                      value={ username }
+                    />
+                  </label>
 
-              <label htmlFor="passaword">
-                Senha:
-                <input
-                  name="passaword"
-                  placeholder="Digite sua senha"
-                  type="password"
-                />
-              </label>
+                  <label htmlFor="password">
+                    Senha:
+                    <input
+                      name="passaword"
+                      placeholder="Digite sua senha"
+                      type="password"
+                    />
+                  </label>
 
-              <label htmlFor="remember">
-                <input
-                  id="remember"
-                  name="remember"
-                  type="checkbox"
-                />
-                Me mantenha conectado
-              </label>
+                  <label htmlFor="remember">
+                    <input
+                      id="remember"
+                      name="remember"
+                      type="checkbox"
+                    />
+                    Me mantenha conectado
+                  </label>
 
-              <button
-                type="submit"
-                disabled={ submitIsDisabled }
-                onClick={ this.onButtonClick }
-                data-testid="login-submit-button"
-              >
-                Entrar
-              </button>
-            </form>
-
+                  <button
+                    type="submit"
+                    disabled={ submitIsDisabled }
+                    onClick={ this.onButtonClick }
+                    data-testid="login-submit-button"
+                  >
+                    Entrar
+                  </button>
+                </div>
+              </form>
+            </div>
           )}
       </div>
     );
@@ -103,8 +102,6 @@ class Login extends Component {
 
 Login.propTypes = {
   history: shape({}).isRequired,
-  username: string.isRequired,
-  handleChange: func.isRequired,
 };
 
 export default Login;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import Login from './pages/Login';
 import Search from './pages/Search';
 import Album from './pages/Album';
@@ -9,68 +10,38 @@ import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
 
 class App extends Component {
-  constructor() {
-    super();
-
-    this.handleChange = this.handleChange.bind(this);
-
-    this.state = {
-      username: '',
-    };
-  }
-
-  handleChange({ target }) {
-    const { name, value } = target;
-    this.setState({ [name]: value });
-  }
-
   render() {
-    const { username } = this.state;
-
     return (
       <Router>
         <Switch>
-          <Route
-            path="/profile/edit"
-            render={ () => <ProfileEdit username={ username } /> }
-          />
-          <Route
-            exact
-            path="/profile"
-            render={ () => <Profile username={ username } /> }
-          />
-          <Route
-            path="/favorites"
-            render={ () => (<Favorites username={ username } />) }
-          />
+
           <Route
             path="/album/:id"
-            render={ (props) => (
-              <Album
-                { ...props }
-                username={ username }
-              />
-            ) }
+            render={ (props) => <Album { ...props } /> }
           />
-          <Route path="/search" render={ () => <Search username={ username } /> } />
+          <Route
+            path="/profile/edit"
+            render={ (props) => <ProfileEdit { ...props } /> }
+          />
+          <Route path="/profile" component={ () => <Profile /> } />
+          <Route path="/favorites" component={ () => <Favorites /> } />
+          <Route path="/search" component={ () => <Search /> } />
           <Route
             exact
             path="/"
             render={ (props) => (
               <Login
                 { ...props }
-                username={ username }
                 handleChange={ this.handleChange }
-              />) }
+              />
+            ) }
           />
+
           <Route path="*">
-            {' '}
             <NotFound />
-            {' '}
           </Route>
         </Switch>
       </Router>
-
     );
   }
 }

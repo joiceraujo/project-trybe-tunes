@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
+import AlbumCard from '../components/AlbumCard';
 
 class Search extends Component {
   constructor() {
@@ -60,7 +61,7 @@ class Search extends Component {
             <label htmlFor="search">
               <input
                 data-testid="search-artist-input"
-                id="search-artist"
+                id="search"
                 onChange={ this.onInputChance }
                 placeholder="Digite o nome do álbum ou do artista..."
                 type="text"
@@ -80,7 +81,9 @@ class Search extends Component {
         </form>
 
         <div>
-          {lastSearch !== '' && albums.length === 0 && !loading
+          {lastSearch !== ''
+          && albums.length === 0
+          && !loading
           && <p> Nenhum álbum foi encontrado </p> }
 
           { loading && <p>Carregando...</p>}
@@ -88,12 +91,20 @@ class Search extends Component {
           { !loading && albums.length > 0 && (
             <p>
               Resultado de álbuns de:
-
+              {''}
+              { lastSearch }
             </p>
           )}
+
+          <ul>
+            { albums.map((album) => (
+              <AlbumCard key={ album.collectionId } album={ album } />
+            )) }
+          </ul>
         </div>
       </div>
     );
   }
 }
+
 export default Search;
